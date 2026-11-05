@@ -7,34 +7,46 @@
     </Filter>
     <Filter Include="src">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="data">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <Extensions>txt</Extensions>
     </Filter>
     <Filter Include="testdata">
       <UniqueIdentifier>{53cbb388-78ee-430b-a2e5-97485ad09663}</UniqueIdentifier>
+      <Extensions>txt</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="testdata\test_results.txt" />
-    <Text Include="testdata\design_documents.txt" />
-    <Text Include="testdata\CONTRIBUTIONS.txt" />
+    <Text Include="testdata\test_results.txt">
+      <Filter>testdata</Filter>
+    </Text>
+    <Text Include="testdata\design_documents.txt">
+      <Filter>testdata</Filter>
+    </Text>
+    <Text Include="testdata\CONTRIBUTIONS.txt">
+      <Filter>testdata</Filter>
+    </Text>
     <Text Include="data\buildings.txt">
       <Filter>data</Filter>
     </Text>
     <Text Include="data\connections.txt">
       <Filter>data</Filter>
     </Text>
-    <Text Include="testdata\facilities.txt">
+    <Text Include="data\departments.txt">
       <Filter>data</Filter>
     </Text>
-    <Text Include="data\departments.txt">
+    <Text Include="data\facilities.txt">
       <Filter>data</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
