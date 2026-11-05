@@ -45,8 +45,61 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp">
+    <ClCompile Include="src\Main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Utils.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Facility.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HashTable.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FacilityDatabase.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CampusGraph.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DepartmentTree.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Fileloader.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Menu.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Utils.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Facility.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HashTable.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FacilityDatabase.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CampusGraph.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DepartmentNode.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DepartmentTree.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileLoader.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Menu.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -153,7 +153,26 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\CampusGraph.cpp" />
+    <ClCompile Include="src\DepartmentTree.cpp" />
+    <ClCompile Include="src\Facility.cpp" />
+    <ClCompile Include="src\FacilityDatabase.cpp" />
+    <ClCompile Include="src\Fileloader.cpp" />
+    <ClCompile Include="src\HashTable.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Menu.cpp" />
+    <ClCompile Include="src\Utils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\CampusGraph.h" />
+    <ClInclude Include="include\DepartmentNode.h" />
+    <ClInclude Include="include\DepartmentTree.h" />
+    <ClInclude Include="include\Facility.h" />
+    <ClInclude Include="include\FacilityDatabase.h" />
+    <ClInclude Include="include\FileLoader.h" />
+    <ClInclude Include="include\HashTable.h" />
+    <ClInclude Include="include\Menu.h" />
+    <ClInclude Include="include\Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
