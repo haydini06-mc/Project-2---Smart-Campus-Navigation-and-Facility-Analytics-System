@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
+    <None Include="compile.bat" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">

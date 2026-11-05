@@ -148,6 +148,7 @@
     <Text Include="testdata\test_results.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="compile.bat" />
     <None Include="README.md">
       <DeploymentContent>true</DeploymentContent>
     </None>
