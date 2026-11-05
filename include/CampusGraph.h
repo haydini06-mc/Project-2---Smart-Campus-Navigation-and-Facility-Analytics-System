@@ -5,7 +5,6 @@
 #define CAMPUSGRAPH_H
 #include <string>
 #include <vector>
-#include <queue>
 
 class CampusGraph {
 private:
