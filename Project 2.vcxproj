@@ -139,9 +139,18 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="CONTRIBUTIONS.txt" />
-    <Text Include="design_documents.txt" />
-    <Text Include="test_results.txt" />
+    <Text Include="data\buildings.txt" />
+    <Text Include="data\connections.txt" />
+    <Text Include="testdata\CONTRIBUTIONS.txt" />
+    <Text Include="data\departments.txt" />
+    <Text Include="testdata\design_documents.txt" />
+    <Text Include="testdata\facilities.txt" />
+    <Text Include="testdata\test_results.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -18,8 +18,23 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="test_results.txt" />
-    <Text Include="design_documents.txt" />
-    <Text Include="CONTRIBUTIONS.txt" />
+    <Text Include="testdata\test_results.txt" />
+    <Text Include="testdata\design_documents.txt" />
+    <Text Include="testdata\CONTRIBUTIONS.txt" />
+    <Text Include="data\buildings.txt">
+      <Filter>data</Filter>
+    </Text>
+    <Text Include="data\connections.txt">
+      <Filter>data</Filter>
+    </Text>
+    <Text Include="testdata\facilities.txt">
+      <Filter>data</Filter>
+    </Text>
+    <Text Include="data\departments.txt">
+      <Filter>data</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
 </Project>
