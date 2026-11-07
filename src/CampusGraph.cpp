@@ -6,6 +6,7 @@
 
 CampusGraph::CampusGraph() : connectionCount(0) {}
 
+// 
 std::string CampusGraph::addBuilding(const std::string& buildingName) {
 	std::string trimmedName = trim(buildingName);
 	if (findBuilding(trimmedName) != -1) {
@@ -16,6 +17,7 @@ std::string CampusGraph::addBuilding(const std::string& buildingName) {
 	return "Building added successfully.";
 }
 
+// 
 int CampusGraph::findBuilding(const std::string& buildingName) const {
 	std::string trimmedName = trim(buildingName);
 	for (size_t i = 0; i < buildings.size(); ++i) {
@@ -26,6 +28,7 @@ int CampusGraph::findBuilding(const std::string& buildingName) const {
 	return -1; // Building not found
 }
 
+// 
 const std::string& CampusGraph::getBuildingName(int index) const {
 	if (index < 0 || index >= static_cast<int>(buildings.size())) {
 		throw std::out_of_range("Index out of range");
@@ -33,6 +36,7 @@ const std::string& CampusGraph::getBuildingName(int index) const {
 	return buildings[index];
 }
 
+// 
 std::string CampusGraph::addConnection(const std::string& building1, const std::string& building2) {
 	int index1 = findBuilding(building1);
 	int index2 = findBuilding(building2);
@@ -54,6 +58,7 @@ std::string CampusGraph::addConnection(const std::string& building1, const std::
 	return "Connection added successfully.";
 }
 
+// 
 int CampusGraph::getDegree(const std::string& buildingName) const {
 	int index = findBuilding(buildingName);
 	if (index == -1) {
@@ -62,6 +67,7 @@ int CampusGraph::getDegree(const std::string& buildingName) const {
 	return static_cast<int>(adjacencyList[index].size());
 }
 
+// 
 int CampusGraph::buildingCount() const {
 	return static_cast<int>(buildings.size());
 }
@@ -70,6 +76,7 @@ int CampusGraph::numConnections() const {
 	return connectionCount;
 }
 
+// 
 void CampusGraph::display() const {
 	for (size_t i = 0; i < buildings.size(); ++i) {
 		std::cout << buildings[i] << ": ";
@@ -80,6 +87,7 @@ void CampusGraph::display() const {
 	}
 }
 
+// 
 void CampusGraph::displayCountsAndDegrees() const {
 	std::cout << "Total buildings: " << buildingCount() << std::endl;
 	std::cout << "Total connections: " << numConnections() << std::endl;
@@ -88,6 +96,7 @@ void CampusGraph::displayCountsAndDegrees() const {
 	}
 }
 
+// 
 void CampusGraph::bfsReachable(const std::string& startBuilding) const {
 	int startIndex = findBuilding(startBuilding);
 	if (startIndex == -1) {
