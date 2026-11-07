@@ -18,3 +18,25 @@ std::string toUpperCase(const std::string& str) {
     }
     return result;
 }
+
+bool equalsIgnoreCase(const std::string& str1, const std::string& str2) {
+	return toUpperCase(str1) == toUpperCase(str2);
+}
+
+std::vector<std::string> split(const std::string& str, char delimiter) {
+	std::vector<std::string> strings;
+	size_t start = 0;
+	size_t end = str.find(delimiter);
+	while (end != std::string::npos) {
+		strings.push_back(str.substr(start, end - start));
+		start = end + 1;
+		end = str.find(delimiter, start);
+	}
+	strings.push_back(str.substr(start));
+	return strings;
+}
+
+bool isCommentOrBlank(const std::string& line) {
+	std::string trimmedLine = trim(line);
+	return trimmedLine.empty() || trimmedLine[0] == '#';
+}
