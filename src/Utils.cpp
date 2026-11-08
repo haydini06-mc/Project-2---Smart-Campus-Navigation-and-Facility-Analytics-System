@@ -40,3 +40,19 @@ bool isCommentOrBlank(const std::string& line) {
 	std::string trimmedLine = trim(line);
 	return trimmedLine.empty() || trimmedLine[0] == '#';
 }
+std::string normalizeId(const std::string& id) {
+    return toUpperCase(trim(id));
+}
+ 
+
+bool isValidFacilityId(const std::string& normalizedId) {
+    if (normalizedId.size() != 4 || normalizedId[0] != 'F') {
+        return false;
+    }
+    for (size_t i = 1; i < 4; i++) {
+        if (!std::isdigit(static_cast<unsigned char>(normalizedId[i]))) {
+            return false;
+        }
+    }
+    return true;
+}
