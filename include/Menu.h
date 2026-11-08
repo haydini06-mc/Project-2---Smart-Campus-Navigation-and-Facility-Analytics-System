@@ -1,7 +1,15 @@
 /* Menu display, safe integer input(clear stream, discard line),
  * name prompts using getline, dispatch to modules. */
-#include "DepartmentTree.h"
+#ifndef MENU_H
+#define MENU_H
 
-// Department menu handlers (Member C)
+#include "DepartmentTree.h"
+// #include "FacilityDatabase.h"   // teammates' types
+// #include "CampusGraph.h"
+
+void runMenu(/* FacilityDatabase& db, CampusGraph& graph, */ DepartmentTree& tree);
+
 void handleAddDepartment(DepartmentTree& tree);
 void handleSearchDepartment(const DepartmentTree& tree);
+
+#endif
