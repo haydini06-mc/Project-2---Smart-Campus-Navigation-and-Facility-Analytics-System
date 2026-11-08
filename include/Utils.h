@@ -13,4 +13,7 @@ static bool equalsIgnoreCase(const std::string& str1, const std::string& str2);
 static std::vector<std::string> split(const std::string& str, char delimiter);
 static bool isCommentOrBlank(const std::string& line);
 
+std::string normalizeId(const std::string& id);
+bool isValidFacilityId(const std::string& normalizedId);
+
 #endif // UTILS_H
