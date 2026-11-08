@@ -14,10 +14,10 @@ private:
 
 public:
 	CampusGraph();
-	std::string addBuilding(const std::string& buildingName);
+	bool addBuilding(const std::string& buildingName, std::string& error);
 	int findBuilding(const std::string& buildingName) const;
 	const std::string& getBuildingName(int index) const;
-	std::string addConnection(const std::string& building1, const std::string& building2);
+	bool addConnection(const std::string& building1, const std::string& building2, std::string& error);
 	int getDegree(const std::string& buildingName) const;
 	int buildingCount() const;
 	int numConnections() const;

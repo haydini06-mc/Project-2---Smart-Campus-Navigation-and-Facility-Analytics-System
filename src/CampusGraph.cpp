@@ -3,18 +3,25 @@
 
 #include <iostream>
 #include <queue>
+#include <stdexcept>
 
 CampusGraph::CampusGraph() : connectionCount(0) {}
 
-// 
-std::string CampusGraph::addBuilding(const std::string& buildingName) {
-	std::string trimmedName = trim(buildingName);
-	if (findBuilding(trimmedName) != -1) {
-		return "Error: Building already exists.";
+// Adds a building if its trimmed name is nonempty and not already present (case-insensitive).
+// Keeps the spelling from the first accepted record. On failure, fills 'error'.
+bool CampusGraph::addBuilding(const std::string& buildingName, std::string& error) {
+	std::string name = trim(buildingName);
+	if (name.empty()) {
+		error = "building name is empty";
+		return false;
 	}
-	buildings.push_back(trimmedName);
+	if (findBuilding(name) != -1) {
+		error = "duplicate building '" + name + "'";
+		return false;
+	}
+	buildings.push_back(name);
 	adjacencyList.push_back(std::vector<int>());
-	return "Building added successfully.";
+	return true;
 }
 
 // 
@@ -37,25 +44,42 @@ const std::string& CampusGraph::getBuildingName(int index) const {
 }
 
 // 
-std::string CampusGraph::addConnection(const std::string& building1, const std::string& building2) {
-	int index1 = findBuilding(building1);
-	int index2 = findBuilding(building2);
-	if (index1 == -1 || index2 == -1) {
-		return "Error: One or both buildings do not exist.";
+// Adds an undirected connection between two existing buildings.
+// Rejects empty names, unknown buildings, self-connections, and duplicates
+// (including reversed ones). Counts the connection once. On failure, fills 'error'.
+bool CampusGraph::addConnection(const std::string& building1, const std::string& building2, std::string& error) {
+	std::string name1 = trim(building1);
+	std::string name2 = trim(building2);
+	if (name1.empty() || name2.empty()) {
+		error = "empty required field";
+		return false;
+	}
+
+	int index1 = findBuilding(name1);
+	int index2 = findBuilding(name2);
+	if (index1 == -1) {
+		error = "unknown building '" + name1 + "'";
+		return false;
+	}
+	if (index2 == -1) {
+		error = "unknown building '" + name2 + "'";
+		return false;
 	}
 	if (index1 == index2) {
-		return "Error: Cannot connect a building to itself.";
+		error = "cannot connect a building to itself";
+		return false;
 	}
-	// Check if the connection already exists
 	for (int neighbor : adjacencyList[index1]) {
 		if (neighbor == index2) {
-			return "Error: Connection already exists.";
+			error = "duplicate connection '" + name1 + "|" + name2 + "'";
+			return false;
 		}
 	}
+
 	adjacencyList[index1].push_back(index2);
 	adjacencyList[index2].push_back(index1);
 	connectionCount++;
-	return "Connection added successfully.";
+	return true;
 }
 
 // 
@@ -78,10 +102,20 @@ int CampusGraph::numConnections() const {
 
 // 
 void CampusGraph::display() const {
+	if (buildings.empty()) {
+		std::cout << "No buildings are loaded." << std::endl;
+		return;
+	}
 	for (size_t i = 0; i < buildings.size(); ++i) {
 		std::cout << buildings[i] << ": ";
-		for (int neighbor : adjacencyList[i]) {
-			std::cout << buildings[neighbor] << " ";
+		if (adjacencyList[i].empty()) {
+			std::cout << "(no connections)";
+		}
+		else {
+			for (size_t j = 0; j < adjacencyList[i].size(); ++j) {
+				if (j > 0) std::cout << ", ";
+				std::cout << buildings[adjacencyList[i][j]];
+			}
 		}
 		std::cout << std::endl;
 	}
@@ -113,7 +147,7 @@ void CampusGraph::bfsReachable(const std::string& startBuilding) const {
 	while (!q.empty()) {
 		currentIndex = q.front();
 		q.pop();
-		std::cout << buildings[currentIndex] << " (Distance: " << reachableCount << ")" << std::endl;
+		std::cout << buildings[currentIndex] << " (Distance: " << distance[currentIndex] << ")" << std::endl;
 		reachableCount++;
 		for (int neighbor : adjacencyList[currentIndex]) {
 			if (!visited[neighbor]) {

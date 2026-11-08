@@ -1,4 +1,5 @@
-// Node with name, parent pointer, vector of chi#ifndef DEPARTMENT_NODE_H
+// Node with name, parent pointer, vector of children
+#ifndef DEPARTMENT_NODE_H
 #define DEPARTMENT_NODE_H
  
 #include <string>
@@ -13,5 +14,4 @@ struct DepartmentNode {
         : name(n), parent(p) {}
 };
  
-#endif
- ldren.
+#endif // DEPARTMENT_NODE_H

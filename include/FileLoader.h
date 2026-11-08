@@ -7,6 +7,7 @@
 #include "CampusGraph.h"
 
 #include <string>
+#include <fstream>
 
 struct LoadResult {
     int accepted;
