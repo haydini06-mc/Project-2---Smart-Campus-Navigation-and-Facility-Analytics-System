@@ -1,0 +1,54 @@
+-----------------------------------------------------------------------------------------------
+CAMPUS GRAPH (Member A)
+-----------------------------------------------------------------------------------------------
+# info
+-----------------------------------------------------------------------------------------------
+
+CAMPUS GRAPH (Member B)
+-----------------------------------------------------------------------------------------------
+Representation
+The campus is stored as an undirected, unweighted graph in the CampusGraph
+class. Buildings are vertices, kept in a vector in buildings.txt order.
+Walkways are edges, kept in an adjacency list (a vector of vectors of integer
+indexes). Each building's list holds its neighbors in the order the
+connections were accepted. Neighbors are never sorted, so BFS order is
+predictable.
+
+Why an adjacency list
+A campus has only a few walkways per building, so the graph is sparse. An
+adjacency list stores only the edges that exist, grows with the data (no fixed
+size), and keeps neighbor insertion order. A matrix would waste space and would
+not preserve neighbor order.
+
+Edges and validation
+Each accepted connection is added to both buildings' lists and counted once.
+A connection is rejected if a name is empty, a building is unknown, a building
+is connected to itself, or the connection already exists (including reversed
+duplicates such as A|B and B|A). Building lookup trims whitespace and ignores
+capitalization, and the spelling from the first accepted record in
+buildings.txt is kept.
+
+BFS reachability
+BFS uses a std::queue and a visited vector. A building is marked visited when
+it is added to the queue. A distance vector records the number of connections
+from the start building. The output lists reachable buildings in visit order
+with their distances, then "Reachable: X of Y". The start building has
+distance 0 and counts as reachable. An unknown start prints an error, and an
+isolated start prints only itself.
+
+Loading
+loadBuildings and loadConnections read each file with getline, skip blank and
+comment lines, and trim whitespace and \r. For each rejected record they print
+a warning with the filename, line number, and reason, then continue. A file
+that cannot be opened prints an error and is treated as empty. Each loader
+ends with a summary line of accepted and rejected counts. addBuilding and
+addConnection return false and fill an error string, so the loader decides how
+to print the message.
+
+Reuse
+The same graph is used for display, counts and degrees, and BFS, and later
+(Final) for shortest path and the connectivity report.
+-----------------------------------------------------------------------------------------------
+
+CAMPUS GRAPH (Member C)
+-----------------------------------------------------------------------------------------------

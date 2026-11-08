@@ -157,5 +157,5 @@ void CampusGraph::bfsReachable(const std::string& startBuilding) const {
 			}
 		}
 	}
-	std::cout << "Reachable: " << distance[currentIndex] << " of " << buildingCount() << std::endl;
+	std::cout << "Reachable: " << reachableCount << " of " << buildingCount() << std::endl;
 }

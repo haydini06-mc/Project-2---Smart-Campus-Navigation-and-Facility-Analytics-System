@@ -1,0 +1,147 @@
+
+
+SMART CAMPUS - TEST RESULTS (Member B: buildings, connections, graph, BFS) - MILESTONE 1
+
+ 
+-----------------------------------------------------------------------------------------------
+LOADING
+-----------------------------------------------------------------------------------------------
+T1  Sample files load
+    Input:    testdata/case0_sample
+    Expected: buildings.txt 7 accepted, 0 rejected; connections.txt 6 accepted, 0 rejected
+    Actual:   
+    Pass/Fail:
+ 
+T2  Blank lines, comments, too few / too many fields, '#' inside a name
+    Input:    testdata/case1_fields
+    Expected: buildings.txt: warning line 6 (wrong field count, found 2); 4 accepted, 1 rejected
+                (Library, Student Union, Gym, "Lab #5"; blank and comment lines skipped, not counted)
+              connections.txt: warning line 4 (found 1) and line 5 (found 3); 2 accepted, 2 rejected
+    Actual:   
+    Pass/Fail:
+ 
+T3  Missing file
+    Input:    testdata/case2_missing_connections (has no connections.txt)
+    Expected: error naming connections.txt, "0 accepted, 0 rejected", no crash;
+              menu 3 shows all 7 buildings "(no connections)"; menu 4 shows 0 connections
+    Actual:   
+    Pass/Fail:
+ 
+T4  Duplicate buildings differing by capitalization/whitespace
+    Input:    testdata/case3_dup_buildings
+    Expected: warnings for lines 3, 4, 6 (duplicate); 2 accepted, 3 rejected; first spelling kept
+              (Library, Gym). Connection line "library|GYM" is accepted (1 accepted, 0 rejected);
+              menu 3 shows "Library: Gym" and "Gym: Library"
+    Actual:   
+    Pass/Fail:
+ 
+T5  Unknown building references in connections
+    Input:    testdata/case4_bad_connections
+    Expected: line 6 and line 7 rejected, each naming unknown building 'Narnia'
+    Actual:   
+    Pass/Fail:
+ 
+T6  Duplicate and reversed connections (same run as T5)
+    Expected: line 3 (reversed), line 4 (exact), line 5 (different capitalization) all rejected
+              as duplicates; only the first Library|Student Union is kept
+    Actual:   
+    Pass/Fail:
+ 
+T7  Self-connection and empty field (same run as T5)
+    Expected: line 8 rejected (cannot connect a building to itself); line 10 rejected (empty field)
+              Summary: connections.txt 2 accepted, 7 rejected; menu 4 shows Total connections: 2
+    Actual:   
+    Pass/Fail:
+ 
+T8  Windows line endings and extra whitespace (extra test)
+    Input:    testdata/case6_crlf_whitespace
+    Expected: buildings 3 accepted, 0 rejected; connections 2 accepted, 0 rejected;
+              names print without stray spaces or \r
+    Actual:   
+    Pass/Fail:
+ 
+-----------------------------------------------------------------------------------------------
+GRAPH DISPLAY
+-----------------------------------------------------------------------------------------------
+T9  View campus graph (menu 3)
+    Input:    testdata/case0_sample, then 3
+    Expected: buildings in file order, neighbors in connection order:
+                Library: Student Union, Business Building
+                Student Union: Library, Science Building, Gym
+                Science Building: Student Union, Engineering Building
+                Engineering Building: Science Building
+                Business Building: Library, Gym
+                Gym: Student Union, Business Building
+                Observatory: (no connections)
+    Actual:   
+    Pass/Fail:
+ 
+T10 Counts and degrees (menu 4)
+    Input:    testdata/case0_sample, then 4
+    Expected: Total buildings: 7; Total connections: 6; degrees Library 2, Student Union 3,
+              Science Building 2, Engineering Building 1, Business Building 2, Gym 2, Observatory 0
+    Actual:   
+    Pass/Fail:
+ 
+-----------------------------------------------------------------------------------------------
+BFS REACHABILITY
+-----------------------------------------------------------------------------------------------
+T11 BFS from a connected building
+    Input:    testdata/case0_sample, 5, Library
+    Expected: Library 0; Student Union 1; Business Building 1; Science Building 2; Gym 2;
+              Engineering Building 3; Reachable: 6 of 7
+    Actual:   
+    Pass/Fail:
+ 
+T12 BFS from an isolated building
+    Input:    testdata/case0_sample, 5, Observatory
+    Expected: Observatory 0; Reachable: 1 of 7
+    Actual:   
+    Pass/Fail:
+ 
+T13 BFS with an unknown start
+    Input:    testdata/case0_sample, 5, Narnia
+    Expected: error identifying the unknown building; return to the menu, no crash
+    Actual:   
+    Pass/Fail:
+ 
+T14 BFS with a blank name
+    Input:    testdata/case0_sample, 5, (press Enter)
+    Expected: "name cannot be blank" error; return to the menu
+    Actual:   
+    Pass/Fail:
+ 
+T15 BFS name with different capitalization and outer spaces
+    Input:    testdata/case0_sample, 5, "  student union  "
+    Expected: starts at Student Union (distance 0), Library 1, Science Building 1, Gym 1,
+              Business Building 2, Engineering Building 2; Reachable: 6 of 7
+    Actual:   
+    Pass/Fail:
+ 
+T16 Multiple connected components
+    Input:    testdata/case5_components, 5, North Hall   (then South Hall, then Lonely Shed)
+    Expected: North Hall 0; North Library 1; North Gym 2; Reachable: 3 of 6
+              South Hall: South Hall 0; South Lab 1; Reachable: 2 of 6
+              Lonely Shed: Lonely Shed 0; Reachable: 1 of 6
+    Actual:   
+    Pass/Fail:
+ 
+T17 Repeated operation after an error
+    Input:    testdata/case0_sample, 5, Narnia, 5, Library
+    Expected: error for Narnia, then the full Library BFS from T11 works normally
+    Actual:   
+    Pass/Fail:
+
+-----------------------------------------------------------------------------------------------
+
+
+SMART CAMPUS - TEST RESULTS (Member A: facilities, hash table, ID search) - MILESTONE 1
+
+
+-----------------------------------------------------------------------------------------------
+
+
+SMART CAMPUS - TEST RESULTS (Member C: department tree, add/search, hierarchy, preorder) - MILESTONE 1
+
+
+-----------------------------------------------------------------------------------------------

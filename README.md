@@ -71,3 +71,9 @@ case handling behave the same everywhere.
 | `isBlankOrComment(line)` | True if the line is blank or its first non-whitespace character is `#`. |
 
 # | Section C: Derick Ohonbamu |
+
+
+
+
+
+g++ -std=c++11 -Wall -Wextra -Iinclude src/*.cpp -o campus
