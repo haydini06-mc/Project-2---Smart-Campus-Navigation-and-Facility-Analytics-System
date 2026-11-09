@@ -109,6 +109,55 @@ LoadResult loadFacilities() {
 	LoadResult result = { 0, 0 };
 }
 
-LoadResult loadDepartments() {
+LoadResult loadDepartments(const std::string& filename, DepartmentTree& tree) {
 	LoadResult result = { 0, 0 };
+
+	std::ifstream in;
+	if (!openDataFile(filename, in)) {
+		printLoadSummary(filename, result);   // missing file = empty file
+		return result;
+	}
+
+	std::string line;
+	int lineNumber = 0;
+	while (std::getline(in, line)) {
+		lineNumber++;
+		if (isCommentOrBlank(line)) continue;
+
+		std::vector<std::string> fields = split(line, '|');
+		std::string error;
+
+		if (fields.size() != 2) {
+			error = "wrong field count (expected 2, found " +
+				std::to_string(fields.size()) + ")";
+		}
+		else {
+			std::string name = trim(fields[0]);
+			std::string parent = trim(fields[1]);
+
+			if (name.empty() || parent.empty()) {
+				error = "empty required field";
+			}
+			else if (tree.isEmpty()) {
+				// first valid record must be the root with parent NONE
+				if (!equalsIgnoreCase(parent, "NONE")) {
+					error = "first department must be the root with parent NONE";
+				}
+				else if (tree.addRoot(name, error)) {
+					result.accepted++;
+					continue;
+				}
+			}
+			else if (tree.addChild(name, parent, error)) {
+				result.accepted++;
+				continue;
+			}
+		}
+
+		result.rejected++;
+		printWarning(filename, lineNumber, error);
+	}
+
+	printLoadSummary(filename, result);
+	return result;
 }
