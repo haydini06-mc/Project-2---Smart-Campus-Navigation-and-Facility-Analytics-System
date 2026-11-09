@@ -52,3 +52,47 @@ The same graph is used for display, counts and degrees, and BFS, and later
 
 CAMPUS GRAPH (Member C)
 -----------------------------------------------------------------------------------------------
+Representation
+The department hierarchy is stored as a general tree in the DepartmentTree
+class. Each DepartmentNode holds its name, a pointer to its parent (null for
+the root), and a vector of child pointers kept in insertion order. The
+tree keeps a root pointer and a node count.
+
+Why a vector of child pointers
+A department can have any number of sub-departments, so a fixed number of
+child slots would not work. A vector grows with the data (no fixed limit)
+and keeps sibling order, which the traversals rely on.
+
+Adding and validation
+The first valid record is the root and must use NONE as its parent. Every
+later department must name a parent that was accepted earlier. A department
+is rejected if its name is empty, its parent is unknown, or its name already
+exists ignoring capitalization. Lookups trim whitespace and ignore case, and
+the spelling from the first accepted record is kept. A rejected addition
+leaves the tree unchanged.
+
+Traversals
+Preorder visits a node and then its children. Postorder visits the children
+and then the node. Level-order uses a std::queue and visits siblings in
+insertion order. The hierarchy display is a preorder walk that indents four
+spaces per depth level.
+
+Statistics
+Depth is the number of edges from the root (root depth 0). Height is the
+maximum depth, computed with a queue. A leaf is a node with no children.
+An empty tree reports 0 departments, 0 leaves, and height N/A. A root-only
+tree has 1 department, 1 leaf, and height 0.
+
+Loading
+loadDepartments reads departments.txt with getline, skips blank and
+comment lines, and trims whitespace and \r. For each rejected record it
+prints a warning with the filename, line number, and reason, then
+continues. A file that cannot be opened prints an error and is treated as
+empty. The loader ends with a summary line of accepted and rejected counts.
+addRoot and addChild return false and fill an error string, so the loader
+decides how to print the message.
+
+Memory
+The DepartmentTree destructor deletes every node using an explicit stack, so
+no heap memory is leaked and long chains cannot overflow the call stack.
+----------------------------------------------------------------------------------------------------
