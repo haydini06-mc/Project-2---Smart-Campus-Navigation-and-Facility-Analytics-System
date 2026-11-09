@@ -5,7 +5,7 @@
 #define FILELOADER_H
 
 #include "CampusGraph.h"
-
+#include "DepartmentTree.h"
 #include <string>
 #include <fstream>
 
@@ -19,7 +19,7 @@ LoadResult loadConnections(const std::string& filename, CampusGraph& graph);
 
 LoadResult loadFacilities();
 
-LoadResult loadDepartments();
+LoadResult loadDepartments(const std::string& filename, DepartmentTree& tree);
 
 void printLoadSummary(const std::string& filename, const LoadResult& result);
 void printWarning(const std::string& filename, int lineNumber, const std::string& message);
