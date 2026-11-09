@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
     loadBuildings(dataDirectory + "buildings.txt", graph);
     loadConnections(dataDirectory + "connections.txt", graph);
     loadFacilities(dataDirectory + "facilities.txt", database, graph);
-    tree.loadFromFile(dataDirectory + "departments.txt", "departments.txt");
+    loadDepartments(dataDirectory + "departments.txt", tree);
     runMenu(database, graph, tree);
     return 0;
 }
