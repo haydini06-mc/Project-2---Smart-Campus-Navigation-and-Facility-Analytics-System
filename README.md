@@ -1,16 +1,48 @@
 # | Project 2: Smart Campus Navigation System and Facility Analytics System |
 # --------------------------------------------------------------------------------------
 
-## | Project Overview |
+Requirements: g++ with C++11 support. Run all commands from the project
+root (the folder that contains data/, src/, and include/).
 
+Build
+    g++ -std=c++11 -Wall -Wextra -Iinclude src/*.cpp -o campus
 
+Run with the default data folder (data/)
+    ./campus
 
-## | Build and Run |
+Run with a different data folder (optional argument)
+    ./campus DATA_DIRECTORY
 
+The data directory must contain buildings.txt, connections.txt,
+facilities.txt, and departments.txt. A missing file is reported and treated
+as empty.
 
+TEST DATA RUN COMMANDS
 
-## | Directory Layout |
+---- MEMBER B TESTS: data folders -----------------------------
 
+Run these with no folder argument. The last 0 exits the menu.
+    B1   ./campus
+    B9   printf "3\n0\n" | ./campus
+    B10  printf "4\n0\n" | ./campus
+    B11  printf "5\nLibrary\n0\n" | ./campus
+    B12  printf "5\nObservatory\n0\n" | ./campus
+    B13  printf "5\nNarnia\n0\n" | ./campus
+    B14  printf "5\n\n0\n" | ./campus
+    B15  printf "5\n  student union  \n0\n" | ./campus
+    B17  printf "5\nNarnia\n5\nLibrary\n0\n" | ./campus
+
+---- MEMBER B TESTS: test folders -----------------------------
+    B2     ./campus testdata/case1_fields
+    B3     ./campus testdata/case2_missing_connections
+    B4     ./campus testdata/case3_dup_buildings
+    B5-B7  ./campus testdata/case4_bad_connections
+    B16    printf "5\nNorth Hall\n5\nSouth Hall\n5\nLonely Shed\n0\n" | ./campus testdata/case5_components
+    B8     ./campus testdata/case6_crlf_whitespace
+
+---- SAVING OUTPUT (optional) ---------------------------------
+Add > output.txt to any command to save the output to a file:
+    printf "5\nLibrary\n0\n" | ./campus > output.txt
 
 # --------------------------------
 
@@ -97,7 +129,3 @@ case handling behave the same everywhere.
 
 **Menu options:** Add department, Search department, Display department hierarchy, Preorder traversal (Milestone 1); Postorder, Level-order, and Department statistics are added in the Final menu.
 
-
-
-
-g++ -std=c++11 -Wall -Wextra -Iinclude src/*.cpp -o campus

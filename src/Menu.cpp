@@ -91,7 +91,7 @@ void handleBfsReachable(const CampusGraph& graph) {
 }
 
 // ---- Main menu loop ----
-void runMenu(/* FacilityDatabase& db, */CampusGraph& graph, DepartmentTree& tree) {
+void runMenu(FacilityDatabase& db, CampusGraph& graph, DepartmentTree& tree) {
     while (true) {
         printMenu();
         int choice = 0;

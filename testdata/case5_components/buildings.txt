@@ -1,0 +1,7 @@
+# BuildingName
+North Hall
+North Library
+North Gym
+South Hall
+South Lab
+Lonely Shed

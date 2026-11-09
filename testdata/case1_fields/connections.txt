@@ -1,0 +1,6 @@
+# BuildingA|BuildingB
+
+Library|Student Union
+Library
+Library|Gym|Extra
+Student Union|Gym

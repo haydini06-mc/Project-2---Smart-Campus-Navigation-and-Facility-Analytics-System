@@ -1,0 +1,3 @@
+# BuildingA|BuildingB
+Library | Student Union
+  Student Union|Science Building  

@@ -1,0 +1,10 @@
+# BuildingA|BuildingB
+Library|Student Union
+Student Union|Library
+Library|Student Union
+library|STUDENT UNION
+Library|Narnia
+Narnia|Gym
+Library|Library
+Library|Business Building
+|Gym

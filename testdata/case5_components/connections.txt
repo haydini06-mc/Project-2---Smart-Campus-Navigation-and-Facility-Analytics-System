@@ -1,0 +1,4 @@
+# BuildingA|BuildingB
+North Hall|North Library
+North Library|North Gym
+South Hall|South Lab
