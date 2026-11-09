@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
     FacilityDatabase database;
     loadBuildings(dataDirectory + "buildings.txt", graph);
     loadConnections(dataDirectory + "connections.txt", graph);
-    loadFacilities(dataDirectory + "facilities.txt", database, graph);
+    // loadFacilities(dataDirectory + "facilities.txt", database, graph);
     loadDepartments(dataDirectory + "departments.txt", tree);
     runMenu(database, graph, tree);
     return 0;

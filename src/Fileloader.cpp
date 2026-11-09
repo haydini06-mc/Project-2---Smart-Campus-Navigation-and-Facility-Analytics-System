@@ -105,9 +105,9 @@ LoadResult loadConnections(const std::string& filename, CampusGraph& graph) {
 	return result;
 }
 
-LoadResult loadFacilities() {
-	LoadResult result = { 0, 0 };
-}
+// LoadResult loadFacilities() {
+// 	LoadResult result = { 0, 0 };
+//}
 
 LoadResult loadDepartments(const std::string& filename, DepartmentTree& tree) {
 	LoadResult result = { 0, 0 };

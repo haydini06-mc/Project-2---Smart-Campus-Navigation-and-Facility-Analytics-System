@@ -4,10 +4,9 @@
 
 #include "FacilityDatabase.h"
 #include "CampusGraph.h"
-// #include "FacilityDatabase.h"   // teammates' types
-// #include "CampusGraph.h"
+#include "DepartmentTree.h"
 
-void runMenu(/* FacilityDatabase& db, */CampusGraph& graph, DepartmentTree& tree);
+void runMenu(FacilityDatabase& db, CampusGraph& graph, DepartmentTree& tree);
 
 void handleAddDepartment(DepartmentTree& tree);
 void handleSearchDepartment(const DepartmentTree& tree);
