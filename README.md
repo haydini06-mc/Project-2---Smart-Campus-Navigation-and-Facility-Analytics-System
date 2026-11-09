@@ -48,84 +48,129 @@ Add > output.txt to any command to save the output to a file:
 
 
 # | Section A: Abhijeeth Chouti |
-Smart Campus Navigation and Facility Analytics System
+Facility Database (Facility.h, FacilityDatabase.h, FacilityDatabase.cpp)
 
-Project Overview
+Purpose: Stores campus facility records and supports displaying all facilities, searching facilities by ID, and validating facility information. It maintains the order in which facilities were accepted from the input file.
 
-This C++ application loads campus buildings, connections, facilities, and academic departments from text files. It uses a custom hash table for facility ID lookup, an undirected graph for campus connections, and a general tree for department hierarchy operations.
+Representation: A vector of facility records connected to a custom hash table.
 
-Milestone 1 Features
+* Facility stores four strings: id, name, building, and category.
+* facilities (std::vector<Facility>) stores accepted facility records in insertion order.
+* idIndex (HashTable) provides fast facility lookup using a normalized facility ID.
 
-1. View all facilities
-2. Search facility by ID
-3. View campus graph
-4. Display graph counts and degrees
-5. Find reachable buildings using BFS
-6. Add department
-7. Search department
-8. Display department hierarchy
-9. Run preorder traversal
-10. Exit
+Each facility is stored in the vector, while the hash table stores its ID and corresponding vector index. This allows facilities to be displayed in file order without scanning the entire vector during ID searches.
 
-Project Structure
+Why a vector: It grows dynamically, preserves the order of accepted records, and allows direct access to a facility using the index returned by the hash table.
 
-Project2/
+Main functions:
 
-* include/ : C++ header files
-* src/ : C++ source files
-* data/ : Instructor-provided data files
-* testdata/ : Additional testing datasets
-* README.txt
-* CONTRIBUTIONS.txt
-* design_document.txt
-* test_results.txt
-* .gitignore
+Function	Description
+addFacility(facility, error)	Trims fields, normalizes the ID, rejects invalid or duplicate IDs and empty fields, and inserts an accepted facility. Returns true on success or false with a rejection reason.
+findById(id)	Looks up a facility using the custom hash table. Returns a pointer to the facility or nullptr if not found.
+findByName(name)	Performs a case-insensitive, exact-name search and returns all matches in insertion order.
+findByCategory(category)	Performs a case-insensitive, exact-category search and returns all matching facilities.
+displayAll()	Prints every accepted facility with ID, name, building, and category, followed by the total count.
+displayIdSearch(id)	Normalizes and validates the entered ID, then displays the matching facility or an appropriate error message.
+size()	Returns the total number of accepted facilities.
+hashCapacity()	Returns the hash table capacity.
+hashEntries()	Returns the number of facility IDs stored in the hash table.
+hashCollisions()	Returns the total number of collisions encountered during accepted insertions.
 
-Build Instructions
+Planned for Final: Facility name search, category search, and facility category report. These functions are already included in the current FacilityDatabase implementation but are not required through the M1 menu.
 
-From the project root directory:
+⸻
 
-g++ -std=c++17 -Wall -Wextra -Iinclude src/*.cpp -o campus
+Custom Hash Table (HashTable.h, HashTable.cpp)
 
-Run Instructions
+Purpose: Provides efficient facility lookup by ID using a custom hash function and separate chaining for collision handling. It also detects duplicate facility IDs and tracks hash table statistics.
 
-Default data directory:
+Representation: A vector of buckets, where each bucket contains a vector of entries.
 
-./campus
+* buckets (std::vector<std::vector<Entry>>) stores the hash table buckets.
+* Entry holds a normalized facility ID (key) and its corresponding facility vector index (recordIndex).
+* entryCount (std::size_t) tracks the number of stored entries.
+* collisionCount (std::size_t) tracks collisions during successful insertions.
+* DEFAULT_CAPACITY is set to 17.
 
-Custom data directory:
+Facility IDs are trimmed and converted to uppercase before hashing, insertion, or lookup. Each ID must begin with F followed by exactly three digits.
 
-./campus testdata/case1
+Hash function:
 
-Input Files
+hash = (hash * 31 + ASCII(character)) % capacity
 
-* buildings.txt
-* connections.txt
-* facilities.txt
-* departments.txt
+The hash starts at zero and processes each character of the normalized facility ID.
 
-The application loads files in the listed order.
+Collision handling: Separate chaining is used. When different IDs map to the same bucket, they are stored as separate entries within that bucket. An insertion into a nonempty bucket counts as one collision, provided the ID is not a duplicate.
 
-Facility Database
+Why separate chaining: It handles collisions without overwriting existing facilities, allows buckets to grow dynamically, and avoids an arbitrary maximum facility count.
 
-Each facility contains an ID, name, building, and category. The program validates facility records, rejects duplicate IDs and unknown building references, and preserves accepted facility order.
+Main functions:
 
-Hash Table
+Function	Description
+HashTable(capacity)	Initializes the hash table with the specified capacity, defaulting to 17.
+hashKey(key)	Calculates the bucket index using the custom polynomial string hash function.
+insert(id, recordIndex)	Normalizes the ID, rejects invalid or duplicate IDs, stores the entry, and updates collision statistics.
+find(id, recordIndex)	Searches the calculated bucket for the normalized ID and returns the associated record index when found.
+capacity()	Returns the number of hash table buckets.
+size()	Returns the number of stored entries.
+collisions()	Returns the collision count.
 
-The facility database uses a custom polynomial string hash function with separate chaining. The initial capacity is 17 buckets. Facility IDs are normalized to uppercase before insertion and lookup.
+⸻
 
-Graph
+Facility File Loading (FileLoader.h, FileLoader.cpp)
 
-Campus buildings are represented using a dynamically sized adjacency list. Connections are undirected. BFS identifies reachable buildings and their distances.
+Purpose: Reads facility records from facilities.txt, validates each record, and stores accepted facilities in the FacilityDatabase. Invalid records are rejected with warnings.
 
-Department Tree
+Input format:
 
-Departments are stored in a general tree. The application supports searching, adding departments, displaying the hierarchy, and preorder traversal.
+FacilityID|FacilityName|BuildingName|Category
 
-Error Handling
+Example:
 
-Invalid records produce warnings containing filenames, line numbers, and reasons. Missing files are treated as empty. Invalid menu input and unsuccessful searches are handled without terminating the program.
+F004|Computer Lab A|Science Building|Computer Lab
 
+Validation:
+
+* Blank lines and comment lines are ignored.
+* Every record must contain exactly four fields.
+* All required fields must be nonempty after trimming.
+* Facility IDs must follow the format F plus exactly three digits.
+* Duplicate facility IDs are rejected without replacing the first accepted record.
+* Building names must exist in the campus graph.
+* Building references are matched case-insensitively, preserving the spelling from buildings.txt.
+* Every rejected record produces a warning containing the filename, line number, and reason.
+
+Main functions:
+
+Function	Description
+loadFacilities(filename, database, graph)	Reads and validates facility records, inserts accepted records, and prints the loading summary and hash diagnostics.
+openDataFile(filename, fileStream)	Opens the requested file and reports an error if it cannot be opened.
+printWarning(filename, lineNumber, message)	Displays a warning for an invalid record.
+printLoadSummary(filename, result)	Displays the number of accepted and rejected records.
+
+Load summary: After loading facilities.txt, the program reports the accepted and rejected record counts, hash table capacity, stored entries, and collisions.
+
+⸻
+
+Facility Menu Functions (Menu.h, Menu.cpp)
+
+Purpose: Connects the facility database operations to the main interactive menu.
+
+Milestone 1 Menu Options:
+
+* Option 1: View all facilities.
+* Option 2: Search facility by ID.
+
+Main functions:
+
+Function	Description
+handleViewFacilities(db)	Calls the facility database to display all accepted facilities and the total count.
+handleSearchFacilityById(db)	Prompts the user for a facility ID, checks for blank input, and performs an ID search.
+runMenu(db, graph, tree)	Displays the repeating M1 menu and dispatches the user’s selection to the appropriate module.
+
+Input handling: Menu selections are read as complete lines. Invalid numeric input is rejected without crashing. Facility IDs are trimmed and normalized before searching.
+
+Planned for Final: Add menu options for facility name search, category search, and the facility category report.
 
 # | Section B: Hayden Goff |
 
