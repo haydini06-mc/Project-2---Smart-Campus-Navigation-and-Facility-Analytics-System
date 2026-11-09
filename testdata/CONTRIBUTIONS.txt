@@ -1,0 +1,34 @@
+SMART CAMPUS NAVIGATION AND FACILITY ANALYTICS - CONTRIBUTIONS (MILESTONE 1)
+
+Member A: Abhijeeth Chouti (GitHub: ac2526)
+  Owned modules:
+    - Facility records (Facility.h / Facility.cpp)
+    - Custom hash table (HashTable.h / HashTable.cpp)
+    - Facility database and ID search (FacilityDatabase.h / FacilityDatabase.cpp)
+    - Facilities file loader
+  Tests: facility loading, ID search, hash collision, duplicate IDs
+
+Member B: Hayden Goff (GitHub: haydini06-mc)
+  Owned modules:
+    - Campus graph (CampusGraph.h / CampusGraph.cpp): adjacency list,
+      add building and connection with validation, display, counts and
+      degrees, BFS reachability
+    - Buildings and connections file loaders (Fileloader.cpp),
+      including the shared warning and load-summary helpers
+  Tests: building and connection loading, graph display, BFS (tests B1 to B17)
+
+Member C: Derick Ohonbamu (GitHub: derickohon)
+  Owned modules:
+    - Department tree (DepartmentNode.h, DepartmentTree.h / DepartmentTree.cpp):
+      general tree, loading, add, search, hierarchy display, preorder
+    - Department menu handlers (add and search)
+  Tests: department loading, tree add/search, preorder
+
+Shared work (all members):
+    - Utils (trim, case-insensitive compare, split, comment check)
+    - Menu and input handling (Menu.h / Menu.cpp)
+    - Main.cpp
+    - compile.bat, .gitignore, README.txt
+    - design_document.txt (each member wrote their own section)
+    - test_results.txt (each member recorded their own tests)
+    - testdata/ test folders
