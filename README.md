@@ -48,7 +48,83 @@ Add > output.txt to any command to save the output to a file:
 
 
 # | Section A: Abhijeeth Chouti |
+Smart Campus Navigation and Facility Analytics System
 
+Project Overview
+
+This C++ application loads campus buildings, connections, facilities, and academic departments from text files. It uses a custom hash table for facility ID lookup, an undirected graph for campus connections, and a general tree for department hierarchy operations.
+
+Milestone 1 Features
+
+1. View all facilities
+2. Search facility by ID
+3. View campus graph
+4. Display graph counts and degrees
+5. Find reachable buildings using BFS
+6. Add department
+7. Search department
+8. Display department hierarchy
+9. Run preorder traversal
+10. Exit
+
+Project Structure
+
+Project2/
+
+* include/ : C++ header files
+* src/ : C++ source files
+* data/ : Instructor-provided data files
+* testdata/ : Additional testing datasets
+* README.txt
+* CONTRIBUTIONS.txt
+* design_document.txt
+* test_results.txt
+* .gitignore
+
+Build Instructions
+
+From the project root directory:
+
+g++ -std=c++17 -Wall -Wextra -Iinclude src/*.cpp -o campus
+
+Run Instructions
+
+Default data directory:
+
+./campus
+
+Custom data directory:
+
+./campus testdata/case1
+
+Input Files
+
+* buildings.txt
+* connections.txt
+* facilities.txt
+* departments.txt
+
+The application loads files in the listed order.
+
+Facility Database
+
+Each facility contains an ID, name, building, and category. The program validates facility records, rejects duplicate IDs and unknown building references, and preserves accepted facility order.
+
+Hash Table
+
+The facility database uses a custom polynomial string hash function with separate chaining. The initial capacity is 17 buckets. Facility IDs are normalized to uppercase before insertion and lookup.
+
+Graph
+
+Campus buildings are represented using a dynamically sized adjacency list. Connections are undirected. BFS identifies reachable buildings and their distances.
+
+Department Tree
+
+Departments are stored in a general tree. The application supports searching, adding departments, displaying the hierarchy, and preorder traversal.
+
+Error Handling
+
+Invalid records produce warnings containing filenames, line numbers, and reasons. Missing files are treated as empty. Invalid menu input and unsuccessful searches are handled without terminating the program.
 
 
 # | Section B: Hayden Goff |
