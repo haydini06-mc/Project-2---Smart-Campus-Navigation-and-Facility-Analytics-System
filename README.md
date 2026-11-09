@@ -71,7 +71,31 @@ case handling behave the same everywhere.
 | `isBlankOrComment(line)` | True if the line is blank or its first non-whitespace character is `#`. |
 
 # | Section C: Derick Ohonbamu |
+## Department Tree (`DepartmentNode.h`, `DepartmentTree.h`, `DepartmentTree.cpp`)
 
+**Purpose:** Stores the academic department hierarchy as a general tree (a node can have any number of children). It supports adding and searching departments, displaying the hierarchy, preorder / postorder / level-order traversals, and department statistics.
+
+**Representation:** Each `DepartmentNode` holds its `name`, a `parent` pointer (`nullptr` for the root), and a `std::vector<DepartmentNode*> children` kept in insertion order. `DepartmentTree` owns the `root` pointer and a node count. The destructor frees every node.
+
+**Why a vector of child pointers:** A department can have any number of sub-departments, the vector grows dynamically (no fixed limits), and sibling order is preserved for traversals.
+
+**Main functions:**
+
+| Function | Description |
+|---|---|
+| `addRoot(name, error)` | Creates the root when the tree is empty. Returns false and fills `error` on failure. |
+| `addChild(name, parent, error)` | Rejects blank names, unknown parents, and duplicate names (case-insensitive). Tree is unchanged on failure. |
+| `find(name)` | Case-insensitive, trimmed search. Returns the node or `nullptr`. |
+| `displaySearchResult(name)` | Shows name, parent (`None` for the root), direct-child count, and depth. |
+| `displayHierarchy()` | Preorder display, one department per line, 4 spaces of indent per depth. |
+| `preorder()` / `postorder()` | Return the traversal as a sequence (no indentation). |
+| `levelOrder()` | Breadth-first traversal using `std::queue`; siblings in insertion order. |
+| `printSequence(title, seq)` | Prints a traversal sequence, or an empty-tree message. |
+| `computeStats()` / `displayStats()` | Total departments, leaves, and height (`N/A` when empty; a root-only tree is 1, 1, 0). |
+
+**File loading (`FileLoader.h`, `Fileloader.cpp`):** `loadDepartments(path, tree)` reads `departments.txt` with `getline`, skips blank and comment lines, trims whitespace and `\r`, and enforces the Section 5.5 rules: the first valid record is the root with parent `NONE`, later records need a parent accepted on an earlier line, and names are unique ignoring case. Each rejected record prints a warning with filename, line number, and reason. A missing file prints an error and is treated as empty. A summary line with accepted and rejected counts is printed at the end.
+
+**Menu options:** Add department, Search department, Display department hierarchy, Preorder traversal (Milestone 1); Postorder, Level-order, and Department statistics are added in the Final menu.
 
 
 
