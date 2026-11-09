@@ -1,6 +1,5 @@
 #include "Utils.h"
 #include "FileLoader.h"
-"
 
 #include <iostream>
 #include <fstream>
